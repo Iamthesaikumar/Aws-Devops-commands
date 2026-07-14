@@ -1,0 +1,60 @@
+Docker Installation.
+sudo dnf install docker -y
+sudo systemctl start docker
+sudo systemctl enable docker
+sudo systemctl status docker
+docker --version
+sudo usermod -aG docker ec2-user
+newgrp docker
+=============================================================================================================================================================
+Docker Image Commands
+docker build -t myapp .
+docker images
+docker pull nginx
+docker tag myapp:latest <ECR-URL>/myapp:latest
+docker push <ECR-URL>/myapp:latest
+docker rmi myapp
+=========================================================================================================================================================
+Docker Container Commands
+docker run -d --name mycontainer -p 80:80 nginx
+docker ps
+docker ps -a
+docker start <container-id>
+docker stop <container-id>
+docker restart <container-id>
+docker rm <container-id>
+docker logs <container-id>
+docker exec -it <container-id> bash
+docker inspect <container-id>
+==========================================================================================================================================================
+Cleanup Commands
+docker system prune -a
+docker image prune
+docker rm $(docker ps -aq)
+=======================================================================================================================================
+Quick Verification Commands
+docker --version
+docker info
+docker ps
+docker images
+=================================================================================================================================================
+ECR Login
+aws ecr get-login-password --region <region> | docker login --username AWS --password-stdin <account-id>.dkr.ecr.<region>.amazonaws.com
+=================================================================================================================================================
+Your Build → ECR Flow
+docker build -t myapp .
+docker images
+docker tag myapp:latest <ECR-URL>/myapp:latest
+docker push <ECR-URL>/myapp:latest
+=================================================================================================================================================
+
+
+
+
+
+
+
+
+
+
+
