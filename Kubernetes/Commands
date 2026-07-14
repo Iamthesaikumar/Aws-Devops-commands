@@ -1,1 +1,78 @@
+Connect EKS Cluster
+aws eks update-kubeconfig --name Pixel --region us-east-2
+kubectl get nodes
+kubectl cluster-info
+=============================================================================================================================================================
+Pod Commands
+kubectl run customer-pod --image=nginx
+kubectl get pods
+kubectl get pods -o wide
+kubectl describe pod customer-pod
+kubectl logs customer-pod
+kubectl logs -f customer-pod
+kubectl exec -it customer-pod -- /bin/sh
+kubectl delete pod customer-pod
+=============================================================================================================================================================
+ReplicaSet Commands
+kubectl apply -f replicaset.yaml
+kubectl get rs
+kubectl describe rs customer-rs
+kubectl scale rs customer-rs --replicas=5
+kubectl scale rs customer-rs --replicas=7
+kubectl scale rs customer-rs --replicas=3
+kubectl delete pod <pod-name>
+kubectl delete rs customer-rs
+kubectl delete rs --all
+=============================================================================================================================================================
+Deployment Commands
+kubectl create deployment nginx-app --image=nginx
+kubectl get deployments
+kubectl describe deployment nginx-app
+kubectl scale deployment nginx-app --replicas=3
+kubectl rollout status deployment/nginx-app
+kubectl delete deployment nginx-app
+=============================================================================================================================================================
+Service Commands
+kubectl expose deployment nginx-app --type=NodePort --port=80
+kubectl get svc
+kubectl describe svc nginx-app
+kubectl delete svc nginx-app
+=============================================================================================================================================================
+Namespace Commands
+kubectl get ns
+kubectl create namespace dev
+kubectl delete namespace dev
+=============================================================================================================================================================
+Useful Verification Commands
+kubectl get all
+kubectl get nodes
+kubectl get pods
+kubectl get deployments
+kubectl get svc
+kubectl version
+kubectl config current-context
+kubectl config get-contexts
+=============================================================================================================================================================
+Apply YAML Files
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl apply -f replicaset.yaml
+kubectl delete -f deployment.yaml
+=============================================================================================================================================================
+ECR → EKS Quick Flow
+aws eks update-kubeconfig --name Pixel --region us-east-2
+kubectl get nodes
+kubectl apply -f deployment.yaml
+kubectl apply -f service.yaml
+kubectl get pods
+kubectl get svc
+
+
+
+
+
+
+
+
+
 
