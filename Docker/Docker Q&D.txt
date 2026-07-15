@@ -1,0 +1,1446 @@
+============================================================
+DOCKER QUESTIONS AND ANSWERS FOR BEGINNERS
+============================================================
+
+1. What is Docker?
+
+Answer:
+Docker is a tool used to run applications inside containers.
+
+Simple example:
+If you create one application on your laptop, Docker helps you run the same application on another laptop, server, or cloud without issues.
+
+Example:
+Developer creates app -> Docker makes it as container -> Container runs anywhere.
+
+
+2. What is a Docker container?
+
+Answer:
+A Docker container is a running application with all required files, libraries, and dependencies.
+
+Simple example:
+If your application needs Nginx, Java, Python, or Node.js, everything will be packed inside the container.
+
+Example:
+Nginx container runs a web server.
+MySQL container runs a database.
+
+
+3. What is a Docker image?
+
+Answer:
+A Docker image is a template used to create containers.
+
+Simple example:
+Image is like a software package.
+Container is the running version of that package.
+
+Example:
+nginx image -> creates nginx container
+mysql image -> creates mysql container
+
+
+4. Difference between Docker image and Docker container?
+
+Answer:
+Docker image is a read-only template.
+Docker container is a running instance of an image.
+
+Example:
+Image = Class
+Container = Object
+
+Or
+
+Image = ISO file
+Container = Installed and running OS
+
+
+5. What is Dockerfile?
+
+Answer:
+Dockerfile is a file that contains instructions to build a Docker image.
+
+Example:
+If we want to create our own application image, we write steps in Dockerfile.
+
+Simple Dockerfile example:
+
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+Meaning:
+FROM nginx:latest means use nginx as base image.
+COPY index.html means copy our html file into nginx web folder.
+
+
+6. What is Docker Hub?
+
+Answer:
+Docker Hub is a public registry where Docker images are stored.
+
+Simple example:
+Like GitHub stores code, Docker Hub stores Docker images.
+
+Example:
+We can pull nginx image from Docker Hub using:
+
+docker pull nginx
+
+
+7. What is Docker registry?
+
+Answer:
+Docker registry is a place where Docker images are stored.
+
+Examples:
+Docker Hub
+AWS ECR
+Azure Container Registry
+Google Container Registry
+
+Simple example:
+In AWS, we push Docker images to ECR.
+
+
+8. What is the command to check Docker version?
+
+Answer:
+
+docker --version
+
+Example output:
+Docker version 25.0.0
+
+
+9. What is the command to pull Docker image?
+
+Answer:
+
+docker pull nginx
+
+Meaning:
+This command downloads nginx image from Docker Hub.
+
+
+10. What is the command to list Docker images?
+
+Answer:
+
+docker images
+
+Meaning:
+This command shows all Docker images available on the system.
+
+
+11. What is the command to run a Docker container?
+
+Answer:
+
+docker run nginx
+
+Meaning:
+This command creates and starts a container using nginx image.
+
+
+12. How to run container in background?
+
+Answer:
+
+docker run -d nginx
+
+Meaning:
+-d means detached mode.
+The container will run in background.
+
+
+13. How to run nginx container with port mapping?
+
+Answer:
+
+docker run -d -p 8080:80 nginx
+
+Meaning:
+8080 is host machine port.
+80 is container port.
+
+Example:
+If you open local host on port 8080 in browser, you can access nginx web page.
+
+
+14. What is port mapping in Docker?
+
+Answer:
+Port mapping is used to access container application from outside.
+
+Example:
+Container nginx runs on port 80.
+We map it to host port 8080.
+
+Command:
+
+docker run -d -p 8080:80 nginx
+
+Now users can access application using host port 8080.
+
+
+15. What is the command to list running containers?
+
+Answer:
+
+docker ps
+
+Meaning:
+This command shows only running containers.
+
+
+16. What is the command to list all containers?
+
+Answer:
+
+docker ps -a
+
+Meaning:
+This command shows running and stopped containers.
+
+
+17. What is the command to stop a container?
+
+Answer:
+
+docker stop <container_id>
+
+Example:
+
+docker stop abc123
+
+Meaning:
+This command stops the running container.
+
+
+18. What is the command to start a stopped container?
+
+Answer:
+
+docker start <container_id>
+
+Example:
+
+docker start abc123
+
+
+19. What is the command to restart a container?
+
+Answer:
+
+docker restart <container_id>
+
+Example:
+
+docker restart abc123
+
+
+20. What is the command to delete a container?
+
+Answer:
+
+docker rm <container_id>
+
+Example:
+
+docker rm abc123
+
+Note:
+Container must be stopped before deleting.
+
+
+21. How to force delete a running container?
+
+Answer:
+
+docker rm -f <container_id>
+
+Example:
+
+docker rm -f abc123
+
+Meaning:
+-f means force delete.
+
+
+22. What is the command to delete Docker image?
+
+Answer:
+
+docker rmi <image_id>
+
+Example:
+
+docker rmi nginx
+
+Meaning:
+This removes the Docker image from local system.
+
+
+23. What is the command to see container logs?
+
+Answer:
+
+docker logs <container_id>
+
+Example:
+
+docker logs abc123
+
+Meaning:
+This command shows logs generated by the container.
+
+
+24. What is the command to go inside a running container?
+
+Answer:
+
+docker exec -it <container_id> /bin/bash
+
+Example:
+
+docker exec -it abc123 /bin/bash
+
+Meaning:
+This opens shell access inside the container.
+
+If bash is not available, use:
+
+docker exec -it <container_id> /bin/sh
+
+
+25. What is docker build command?
+
+Answer:
+
+docker build -t myapp:v1 .
+
+Meaning:
+This command builds Docker image from Dockerfile.
+
+-t means tag name.
+myapp is image name.
+v1 is image version.
+. means Dockerfile is available in current folder.
+
+
+26. What is Docker tag?
+
+Answer:
+Docker tag is used to give version name to image.
+
+Example:
+
+myapp:v1
+myapp:v2
+nginx:latest
+
+Simple meaning:
+Tag helps us identify image version.
+
+
+27. What is latest tag in Docker?
+
+Answer:
+latest is the default tag used when no version is mentioned.
+
+Example:
+
+docker pull nginx
+
+This is same as:
+
+docker pull nginx:latest
+
+
+28. How to build Docker image with version?
+
+Answer:
+
+docker build -t myapp:v1 .
+
+Example:
+If application version is 1, use v1.
+If application version is 2, use v2.
+
+
+29. How to run our own Docker image?
+
+Answer:
+
+docker run -d -p 8080:80 myapp:v1
+
+Meaning:
+This runs myapp version v1 container and exposes it on port 8080.
+
+
+30. What is Docker volume?
+
+Answer:
+Docker volume is used to store data permanently.
+
+Simple example:
+If MySQL container is deleted, database data may be lost.
+Using volume, we can keep the data safe.
+
+Example command:
+
+docker volume create myvolume
+
+
+31. Why do we need Docker volume?
+
+Answer:
+We need Docker volume to save data outside the container.
+
+Example:
+Database data
+Application logs
+Uploaded files
+
+If container is deleted, volume data will still be available.
+
+
+32. What is Docker network?
+
+Answer:
+Docker network allows containers to communicate with each other.
+
+Simple example:
+Application container needs to connect with database container.
+Docker network helps both containers talk to each other.
+
+
+33. What is Docker Compose?
+
+Answer:
+Docker Compose is used to run multiple containers together using one YAML file.
+
+Example:
+One application may need:
+Web application
+Database
+Redis
+
+Instead of running each container manually, we can use docker-compose.yml.
+
+
+34. What is docker-compose.yml?
+
+Answer:
+docker-compose.yml is a file where we define multiple containers and their configuration.
+
+Example:
+We can define app container and database container in one file.
+
+
+35. Difference between Docker and Docker Compose?
+
+Answer:
+Docker is used to run containers.
+Docker Compose is used to manage multiple containers together.
+
+Example:
+Docker: Run one nginx container.
+Docker Compose: Run app + database + redis together.
+
+
+36. What is the command to check Docker service status?
+
+Answer:
+
+sudo systemctl status docker
+
+Meaning:
+This shows whether Docker service is running or stopped.
+
+
+37. What is the command to start Docker service?
+
+Answer:
+
+sudo systemctl start docker
+
+
+38. What is the command to enable Docker service?
+
+Answer:
+
+sudo systemctl enable docker
+
+Meaning:
+Docker will start automatically after system reboot.
+
+
+39. What is the command to stop Docker service?
+
+Answer:
+
+sudo systemctl stop docker
+
+
+40. What is the command to login to Docker Hub?
+
+Answer:
+
+docker login
+
+Meaning:
+This command is used to login to Docker Hub account.
+
+
+41. What is docker push?
+
+Answer:
+docker push is used to upload Docker image to a registry.
+
+Example:
+
+docker push username/myapp:v1
+
+Meaning:
+This uploads myapp:v1 image to Docker Hub or another registry.
+
+
+42. What is docker pull?
+
+Answer:
+docker pull is used to download Docker image from registry.
+
+Example:
+
+docker pull nginx
+
+Meaning:
+This downloads nginx image from Docker Hub.
+
+
+43. What is Docker daemon?
+
+Answer:
+Docker daemon is the background service that manages Docker images, containers, networks, and volumes.
+
+Simple example:
+When we run docker commands, Docker daemon does the actual work in background.
+
+
+44. What is Docker client?
+
+Answer:
+Docker client is the command-line tool we use to run Docker commands.
+
+Example:
+
+docker ps
+docker images
+docker run nginx
+
+These commands are sent to Docker daemon.
+
+
+45. What happens when we run docker run nginx?
+
+Answer:
+Docker checks if nginx image is available locally.
+If image is not available, Docker downloads it from Docker Hub.
+Docker creates a container from the image.
+Docker starts the container.
+
+
+46. What is containerization?
+
+Answer:
+Containerization means packaging application with all required dependencies so it can run anywhere.
+
+Example:
+Application + libraries + configuration = Container
+
+
+47. Why do companies use Docker?
+
+Answer:
+Companies use Docker because:
+
+Application runs same in all environments.
+Easy to deploy.
+Easy to scale.
+Reduces dependency issues.
+Works well with Kubernetes.
+Helps in CI/CD pipelines.
+
+
+48. Difference between Virtual Machine and Docker container?
+
+Answer:
+Virtual Machine has full operating system.
+Docker container shares host operating system kernel.
+
+Simple meaning:
+VM is heavy.
+Container is lightweight.
+
+Example:
+VM may take more memory and time to start.
+Container starts quickly and uses fewer resources.
+
+
+49. Can we run multiple containers from same image?
+
+Answer:
+Yes, we can run multiple containers from same Docker image.
+
+Example:
+
+docker run -d -p 8081:80 nginx
+docker run -d -p 8082:80 nginx
+
+This creates two nginx containers from same image.
+
+
+50. What is container ID?
+
+Answer:
+Container ID is a unique ID given to each Docker container.
+
+Example:
+When we run:
+
+docker ps
+
+We can see container ID.
+
+
+51. What is image ID?
+
+Answer:
+Image ID is a unique ID given to each Docker image.
+
+Example:
+When we run:
+
+docker images
+
+We can see image ID.
+
+
+52. What is the command to remove unused Docker data?
+
+Answer:
+
+docker system prune
+
+Meaning:
+This removes unused containers, networks, and cache.
+
+Force remove:
+
+docker system prune -f
+
+
+53. What is the command to remove all unused images also?
+
+Answer:
+
+docker system prune -a
+
+Meaning:
+This removes unused images also.
+
+Be careful:
+This can delete images which are not used by containers.
+
+
+54. What is the command to inspect a container?
+
+Answer:
+
+docker inspect <container_id>
+
+Example:
+
+docker inspect abc123
+
+Meaning:
+This shows detailed information about container.
+
+
+55. What is the command to check container resource usage?
+
+Answer:
+
+docker stats
+
+Meaning:
+This shows CPU, memory, network, and disk usage of running containers.
+
+
+56. What is the command to give name to container?
+
+Answer:
+
+docker run -d --name my-nginx nginx
+
+Meaning:
+This creates container with name my-nginx.
+
+
+57. Why do we give name to container?
+
+Answer:
+Container name is easy to remember compared to container ID.
+
+Example:
+
+docker stop my-nginx
+
+Instead of:
+
+docker stop abc123
+
+
+58. What is the command to run container with custom name and port?
+
+Answer:
+
+docker run -d --name my-web -p 8080:80 nginx
+
+Meaning:
+Container name is my-web.
+Host port is 8080.
+Container port is 80.
+
+
+59. What is the command to copy file from host to container?
+
+Answer:
+
+docker cp index.html <container_id>:/usr/share/nginx/html/index.html
+
+Example:
+
+docker cp index.html abc123:/usr/share/nginx/html/index.html
+
+
+60. What is the command to copy file from container to host?
+
+Answer:
+
+docker cp <container_id>:/path/file.txt ./file.txt
+
+Example:
+
+docker cp abc123:/tmp/test.txt ./test.txt
+
+
+61. What is base image?
+
+Answer:
+Base image is the starting image used in Dockerfile.
+
+Example:
+
+FROM nginx:latest
+
+Here nginx:latest is the base image.
+
+
+62. What is CMD in Dockerfile?
+
+Answer:
+CMD defines the default command to run when container starts.
+
+Example:
+
+CMD ["nginx", "-g", "daemon off;"]
+
+
+63. What is COPY in Dockerfile?
+
+Answer:
+COPY is used to copy files from local system to Docker image.
+
+Example:
+
+COPY index.html /usr/share/nginx/html/index.html
+
+
+64. What is RUN in Dockerfile?
+
+Answer:
+RUN is used to execute commands while building the Docker image.
+
+Example:
+
+RUN apt update
+
+Meaning:
+This command runs during image build time.
+
+
+65. Difference between RUN and CMD?
+
+Answer:
+RUN executes during image build.
+CMD executes when container starts.
+
+Example:
+RUN installs packages.
+CMD starts application.
+
+
+66. What is EXPOSE in Dockerfile?
+
+Answer:
+EXPOSE tells which port the container application uses.
+
+Example:
+
+EXPOSE 80
+
+Meaning:
+Application inside container uses port 80.
+
+
+67. What is .dockerignore file?
+
+Answer:
+.dockerignore file is used to ignore unnecessary files while building Docker image.
+
+Example:
+We can ignore:
+
+.git
+node_modules
+logs
+temporary files
+
+
+68. Why do we use .dockerignore?
+
+Answer:
+To reduce image size.
+To avoid copying unwanted files.
+To make build faster.
+
+
+69. What is multi-stage build in Docker?
+
+Answer:
+Multi-stage build is used to create smaller Docker images.
+
+Simple example:
+First stage builds the application.
+Second stage keeps only final required files.
+
+This reduces image size.
+
+
+70. What is Docker image layer?
+
+Answer:
+Docker image is made of multiple layers.
+
+Example:
+Each Dockerfile instruction creates a layer.
+
+FROM creates one layer.
+COPY creates one layer.
+RUN creates one layer.
+
+
+71. Why Docker images are lightweight?
+
+Answer:
+Docker images use layers and share common files.
+Containers share the host OS kernel.
+That is why Docker is lightweight compared to virtual machines.
+
+
+72. What is the full flow of Docker?
+
+Answer:
+Step 1: Create application files.
+Step 2: Create Dockerfile.
+Step 3: Build Docker image.
+Step 4: Run Docker container.
+Step 5: Test application.
+Step 6: Tag image.
+Step 7: Push image to registry.
+Step 8: Deploy image in server or Kubernetes.
+
+
+73. Example Docker flow for simple HTML app
+
+Answer:
+
+Step 1: Create index.html
+
+<html>
+<body>
+<h1>Welcome to Docker Version 1</h1>
+</body>
+</html>
+
+Step 2: Create Dockerfile
+
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+Step 3: Build image
+
+docker build -t my-html-app:v1 .
+
+Step 4: Run container
+
+docker run -d --name my-html-container -p 8080:80 my-html-app:v1
+
+Step 5: Verify in browser
+
+Open localhost port 8080 in browser.
+
+
+74. How to create version 2 Docker image?
+
+Answer:
+Update index.html:
+
+<html>
+<body>
+<h1>Welcome to Docker Version 2</h1>
+</body>
+</html>
+
+Build new image:
+
+docker build -t my-html-app:v2 .
+
+Run version 2 container:
+
+docker run -d --name my-html-container-v2 -p 8081:80 my-html-app:v2
+
+
+75. How Docker is useful in Kubernetes?
+
+Answer:
+Docker creates container images.
+Kubernetes runs and manages those container images.
+
+Simple flow:
+Developer writes code.
+Docker builds image.
+Image is pushed to registry like ECR.
+Kubernetes pulls image.
+Kubernetes runs application as pods.
+
+
+76. What is the relation between Docker, ECR, and Kubernetes?
+
+Answer:
+Docker builds the image.
+ECR stores the image.
+Kubernetes deploys the image.
+
+Simple flow:
+Docker image -> Push to ECR -> Deploy in EKS/Kubernetes
+
+
+77. What is AWS ECR?
+
+Answer:
+AWS ECR means Elastic Container Registry.
+It is used to store Docker images in AWS.
+
+Example:
+We build Docker image locally or on EC2.
+Then we push image to ECR.
+Then EKS pulls image from ECR.
+
+
+78. Why do we tag Docker image before pushing to ECR?
+
+Answer:
+We tag Docker image so Docker knows the exact ECR repository path.
+
+Example:
+
+docker tag myapp:v1 aws_account_id.dkr.ecr.region.amazonaws.com/myapp:v1
+
+
+79. What is Docker best practice?
+
+Answer:
+Use small base images.
+Use proper image tags.
+Do not store passwords inside image.
+Use .dockerignore file.
+Remove unwanted files.
+Use multi-stage build.
+Keep image size small.
+
+
+80. What should we not store inside Docker image?
+
+Answer:
+Do not store:
+
+Passwords
+Secrets
+Access keys
+Private certificates
+Sensitive files
+
+Use secret management tools instead.
+
+
+81. What is the difference between stopped and removed container?
+
+Answer:
+Stopped container still exists on the system.
+Removed container is deleted completely.
+
+Example:
+docker stop stops container.
+docker rm deletes container.
+
+
+82. If container is deleted, image also deleted?
+
+Answer:
+No.
+If container is deleted, image will still remain.
+
+Example:
+Container is created from image.
+Deleting container does not delete image.
+
+
+83. If image is deleted, running container will stop?
+
+Answer:
+Usually, Docker will not allow deleting image if container is using it.
+
+First stop and remove container.
+Then remove image.
+
+
+84. What is detached mode?
+
+Answer:
+Detached mode means container runs in background.
+
+Command:
+
+docker run -d nginx
+
+
+85. What is interactive mode?
+
+Answer:
+Interactive mode means we can interact with container terminal.
+
+Command:
+
+docker run -it ubuntu /bin/bash
+
+
+86. What is ubuntu Docker image?
+
+Answer:
+Ubuntu Docker image gives a basic Ubuntu Linux environment inside container.
+
+Example:
+
+docker run -it ubuntu /bin/bash
+
+
+87. What is alpine image?
+
+Answer:
+Alpine is a very small Linux image.
+
+Example:
+
+docker pull alpine
+
+It is used when we need lightweight images.
+
+
+88. What is the command to see Docker disk usage?
+
+Answer:
+
+docker system df
+
+Meaning:
+This shows how much disk space Docker images, containers, and volumes are using.
+
+
+89. What is the command to check Docker networks?
+
+Answer:
+
+docker network ls
+
+
+90. What is the command to create Docker network?
+
+Answer:
+
+docker network create my-network
+
+
+91. How to run container in a specific network?
+
+Answer:
+
+docker run -d --name my-nginx --network my-network nginx
+
+
+92. What is the command to check Docker volumes?
+
+Answer:
+
+docker volume ls
+
+
+93. What is the command to create Docker volume?
+
+Answer:
+
+docker volume create my-volume
+
+
+94. How to run container with volume?
+
+Answer:
+
+docker run -d --name my-nginx -p 8080:80 -v my-volume:/usr/share/nginx/html nginx
+
+Meaning:
+my-volume stores data for nginx html folder.
+
+
+95. What is the command to remove Docker volume?
+
+Answer:
+
+docker volume rm my-volume
+
+
+96. What is Docker login used for?
+
+Answer:
+Docker login is used to login to Docker registry.
+
+Example:
+
+docker login
+
+After login, we can push images to registry.
+
+
+97. What is the command to logout from Docker?
+
+Answer:
+
+docker logout
+
+
+98. What is Docker repository?
+
+Answer:
+Docker repository is a place inside registry where images are stored.
+
+Example:
+Repository name: myapp
+
+Images inside repository:
+myapp:v1
+myapp:v2
+myapp:v3
+
+
+99. What is image versioning?
+
+Answer:
+Image versioning means creating different versions of same image.
+
+Example:
+myapp:v1
+myapp:v2
+myapp:v3
+
+This helps during deployments and rollbacks.
+
+
+100. Why is Docker important for DevOps?
+
+Answer:
+Docker is important because it helps automate application build and deployment.
+
+In DevOps flow:
+Code is pushed to Git.
+Pipeline builds Docker image.
+Image is pushed to registry.
+Image is deployed to Kubernetes.
+
+This makes deployment faster and consistent.
+
+
+============================================================
+COMMON DOCKER COMMANDS
+============================================================
+
+Check Docker version:
+
+docker --version
+
+Start Docker:
+
+sudo systemctl start docker
+
+Enable Docker:
+
+sudo systemctl enable docker
+
+Check Docker status:
+
+sudo systemctl status docker
+
+Pull image:
+
+docker pull nginx
+
+List images:
+
+docker images
+
+Run container:
+
+docker run nginx
+
+Run container in background:
+
+docker run -d nginx
+
+Run container with port:
+
+docker run -d -p 8080:80 nginx
+
+List running containers:
+
+docker ps
+
+List all containers:
+
+docker ps -a
+
+Stop container:
+
+docker stop <container_id>
+
+Start container:
+
+docker start <container_id>
+
+Restart container:
+
+docker restart <container_id>
+
+Remove container:
+
+docker rm <container_id>
+
+Force remove container:
+
+docker rm -f <container_id>
+
+Remove image:
+
+docker rmi <image_id>
+
+View logs:
+
+docker logs <container_id>
+
+Go inside container:
+
+docker exec -it <container_id> /bin/bash
+
+Build image:
+
+docker build -t myapp:v1 .
+
+Run custom image:
+
+docker run -d -p 8080:80 myapp:v1
+
+Check Docker disk usage:
+
+docker system df
+
+Clean unused Docker data:
+
+docker system prune -f
+
+List volumes:
+
+docker volume ls
+
+Create volume:
+
+docker volume create my-volume
+
+List networks:
+
+docker network ls
+
+Create network:
+
+docker network create my-network
+
+
+============================================================
+SIMPLE REAL-TIME EXAMPLE
+============================================================
+
+Scenario:
+I have one HTML application.
+I want to run it using Docker.
+
+Step 1:
+Create index.html file.
+
+<html>
+<body>
+<h1>Hello, this is my Docker app version 1</h1>
+</body>
+</html>
+
+Step 2:
+Create Dockerfile.
+
+FROM nginx:latest
+COPY index.html /usr/share/nginx/html/index.html
+
+Step 3:
+Build Docker image.
+
+docker build -t my-docker-app:v1 .
+
+Step 4:
+Run container.
+
+docker run -d --name my-app-container -p 8080:80 my-docker-app:v1
+
+Step 5:
+Verify running container.
+
+docker ps
+
+Step 6:
+Open application in browser.
+
+Open localhost port 8080 in browser.
+
+Step 7:
+Check logs.
+
+docker logs my-app-container
+
+Step 8:
+Stop container.
+
+docker stop my-app-container
+
+Step 9:
+Remove container.
+
+docker rm my-app-container
+
+Step 10:
+Remove image.
+
+docker rmi my-docker-app:v1
+
+
+============================================================
+DOCKER SIMPLE INTERVIEW QUESTIONS
+============================================================
+
+1. Why do we use Docker?
+
+Answer:
+We use Docker to package and run applications in containers. It helps the application run the same way in different environments.
+
+
+2. What problem does Docker solve?
+
+Answer:
+Docker solves the problem of application working on one machine but failing on another machine due to dependency issues.
+
+
+3. Is Docker a virtual machine?
+
+Answer:
+No. Docker is not a virtual machine. Docker uses containers. Containers are lightweight compared to virtual machines.
+
+
+4. Can Docker run on Linux?
+
+Answer:
+Yes. Docker can run on Linux.
+
+
+5. Can Docker run on Windows?
+
+Answer:
+Yes. Docker can run on Windows using Docker Desktop.
+
+
+6. Can one image create multiple containers?
+
+Answer:
+Yes. One image can create multiple containers.
+
+
+7. Can one container run multiple applications?
+
+Answer:
+Technically yes, but best practice is to run one main application per container.
+
+
+8. What is the default Dockerfile name?
+
+Answer:
+Dockerfile
+
+
+9. Is Docker used in Kubernetes?
+
+Answer:
+Docker is used to build container images. Kubernetes uses container images to run applications as pods.
+
+
+10. What is the most used Docker command?
+
+Answer:
+Common commands are:
+
+docker ps
+docker images
+docker run
+docker build
+docker pull
+docker push
+
+
+============================================================
+END OF DOCUMENT
+============================================================
