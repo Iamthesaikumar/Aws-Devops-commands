@@ -3,9 +3,8 @@ DOCKER QUESTIONS AND ANSWERS FOR BEGINNERS
 ============================================================
 
 1. What is Docker?
-
 Answer:
-Docker is a tool used to run applications inside containers.
+Docker is a containerization platform that packages an application, its runtime, libraries, and dependencies into a single image, allowing it to run consistently on any server.
 
 Simple example:
 If you create one application on your laptop, Docker helps you run the same application on another laptop, server, or cloud without issues.
