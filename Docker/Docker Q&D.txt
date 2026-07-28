@@ -1,7 +1,6 @@
 ============================================================
 DOCKER QUESTIONS AND ANSWERS FOR BEGINNERS
 ============================================================
-
 1. What is Docker?
 Answer:
 Docker is a containerization platform that packages an application, its runtime, libraries, and dependencies into a single image, allowing it to run consistently on any server.
@@ -11,10 +10,8 @@ If you create one application on your laptop, Docker helps you run the same appl
 
 Example:
 Developer creates app -> Docker makes it as container -> Container runs anywhere.
-
-
+=============================================================================================================================
 2. What is a Docker container?
-
 Answer:
 A Docker container is a running application with all required files, libraries, and dependencies.
 
@@ -25,23 +22,25 @@ Example:
 Nginx container runs a web server.
 MySQL container runs a database.
 
+Image = Packaged Application
+Container = Running Application
 
+=============================================================================================================================
 3. What is a Docker image?
-
 Answer:
 A Docker image is a template used to create containers.
 
 Simple example:
 Image is like a software package.
 Container is the running version of that package.
+Best Example:
+A Docker Image is a packaged application that is not running.
 
 Example:
 nginx image -> creates nginx container
 mysql image -> creates mysql container
-
-
+============================================================================================================================
 4. Difference between Docker image and Docker container?
-
 Answer:
 Docker image is a read-only template.
 Docker container is a running instance of an image.
@@ -49,13 +48,10 @@ Docker container is a running instance of an image.
 Example:
 Image = Class
 Container = Object
-
 Or
-
 Image = ISO file
 Container = Installed and running OS
-
-
+=============================================================================================================================
 5. What is Dockerfile?
 
 Answer:
